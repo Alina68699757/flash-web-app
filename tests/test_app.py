@@ -19,7 +19,7 @@ class TestApp(unittest.TestCase):
 
         self.assertEqual(
             response.data.decode('utf-8'),
-            'Hello, World!'
+            'Hello, NEU!'
         )
 
 
