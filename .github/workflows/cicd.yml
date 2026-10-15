@@ -31,13 +31,14 @@ jobs:
       - name: Configure SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.TOUGE_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.TOUGE_SSH_KNOWN_HOSTS }}
           SERVER_IP: ${{ secrets.TOUGE_SERVER_IP }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -T 10 -p 52620 -H "$SERVER_IP" >> ~/.ssh/known_hosts
+          printf "%s\n" "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
 
       - name: Deploy Flask application
         env:
